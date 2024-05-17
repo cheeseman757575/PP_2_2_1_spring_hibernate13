@@ -16,20 +16,52 @@ public class MainApp {
             new AnnotationConfigApplicationContext(AppConfig.class);
 
       UserService userService = context.getBean(UserService.class);
+//
+//      Car car = new Car("Lamborgini", 999);
+//      User user = new User("Bob","Hrenov", "user1@mail.ru");
+//
+//      car.setUser(user);
+//      user.setCar(car);
+//
+//      userService.add(user);
+//
+//      user = userService.getUserCar(car);
 
-      Car car = new Car("Lamborgini", 999);
-      User user = new User("Bob","Hrenov", "user1@mail.ru");
-
-      car.setUser(user);
-      user.setCar(car);
-
-      userService.add(user);
       //userService.addCar(new Car());
 
 //      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
 //      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
 //      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
 //      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
+
+//      userService.addCar(new Car("Mersedes1", 120));
+//      userService.addCar(new Car("Mersedes2", 220));
+//      userService.addCar(new Car("Mersedes3", 320));
+//      userService.addCar(new Car("Mersedes4", 420));
+
+
+//      new User().setCar(new Car());
+
+      User user = new User("Bob","Hrenov", "user1@mail.ru");
+      Car car = new Car("Lamborgini", 999);
+      car.setUser(user);
+      user.setCar(car);
+      userService.addCar(car);
+
+
+
+      User user2 = userService.getUserCar(car);
+      System.out.println(user2);
+
+
+//         List<User> users = userService.getUsersList();
+//
+//         User user1 = users.get(users.size() - 1);
+//         userService.delete(user1);
+
+
+
+
 
 
 //         List<User> users = userService.listUsers();

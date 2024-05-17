@@ -18,8 +18,9 @@ public class Car {
     @Column(name = "series")
     private int series;
 
-    @OneToOne
-    private User user;
+        @OneToOne (fetch = FetchType.LAZY)
+       @JoinColumn (name = "user_id")
+       private User user;
 
 
 
@@ -30,11 +31,6 @@ public class Car {
         this.series = series;
     }
 
-    public Car(String model, int series, User user) {
-        this.model = model;
-        this.series = series;
-        this.user = user;
-    }
 
     public String getModel() {
         return model;

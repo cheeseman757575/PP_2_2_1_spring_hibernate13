@@ -4,7 +4,6 @@ import hiber.model.Car;
 import hiber.model.User;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -13,11 +12,14 @@ public interface UserService {
 
     void addCar(Car car);
 
-    default User getUserCar(Car car) {
-        return null;
-    }
+    void delete (User user);
+
+
+    void addUserCar(Car car);
+
+    default User getUserCar(Car car) {return null;}
 
 //    public List<User> getUserByCar(Collection<String> model, Collection<Integer> series);
 
-    List<User> listUsers();
+    List<User> getUsersList();
 }
