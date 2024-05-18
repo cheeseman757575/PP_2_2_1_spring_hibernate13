@@ -46,12 +46,15 @@ public class MainApp {
       Car car = new Car("Lamborgini", 999);
       car.setUser(user);
       user.setCar(car);
-      userService.addCar(car);
+
+      userService.add(user);
+      user = userService.getUserCar(car);
 
 
 
-      User user2 = userService.getUserCar(car);
-      System.out.println(user2);
+
+//      User user2 = userService.getUserCar(car);
+//      System.out.println(user2);
 
 
 //         List<User> users = userService.getUsersList();
