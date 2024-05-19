@@ -15,11 +15,8 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserDaoImp implements UserDao {
-
-   private final SessionFactory sessionFactory;
-//   private String model;
-//   private int series;
+   public class UserDaoImp implements UserDao {
+   private SessionFactory sessionFactory;
 
    @Autowired
    public UserDaoImp(SessionFactory sessionFactory) {
@@ -35,38 +32,33 @@ public class UserDaoImp implements UserDao {
    public void addCar(Car car) {sessionFactory.getCurrentSession().save(car);}
 
 
-
-
    @Override
    @SuppressWarnings("unchecked")
-   public List<User> getUsersList() {
+   public List<User> listUsers() {
       TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
       return query.getResultList();
    }
 
    @Override
-   @SuppressWarnings("unchecked")
-   public List<Car> getCarsList() {
-      TypedQuery<Car> query=sessionFactory.getCurrentSession().createQuery("from Car");
-      return query.getResultList();
-   }
-   @Override
    public void delete (User user) {
       sessionFactory.getCurrentSession().delete(user);
    }
 
-
-   //   public List<User> getUserByCar(Collection<String> model, Collection<Integer> series);
    @Override
-   public User getUserCar(Car car) {
-      TypedQuery <User> query = sessionFactory.getCurrentSession().createQuery(
-              "Select u From User u JOIN FETCH u.car c where c.model = :model AND c.series = :series", User.class);
+   public User getUserCar(String model, int series) {
+      Query query = sessionFactory.getCurrentSession().createQuery(
+              "Select u From User u JOIN u.car c where c.model = :model AND c.series = :series");
 
-      query.setParameter("model", car.getModel());
-      query.setParameter("series", car.getSeries());
+      query.setParameter("model", model);
+      query.setParameter("series", series);
 //      Pair pair = Pair.of("model", car.getModel());
 //      query.setParameter(pair.fst, pair.snd);
-      return query.setMaxResults(1).getSingleResult();
+      return (User) query.getSingleResult();
+   }
+
+   @Override
+   public List<User> getUsersList() {
+      return null;
    }
 
 }

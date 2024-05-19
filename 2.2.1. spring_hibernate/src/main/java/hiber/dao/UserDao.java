@@ -9,12 +9,10 @@ public interface UserDao {
    void add(User user);
    void addCar(Car car);
 
-   List<User> getUsersList();
-
+    List<User> listUsers();
    void delete (User user);
 
-   public List<Car> getCarsList();
+    public User getUserCar(String model, int series);
 
-    User getUserCar(Car car);
-
+    List<User> getUsersList();
 }

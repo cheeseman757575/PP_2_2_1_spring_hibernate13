@@ -11,8 +11,7 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    private Long id;
+    private long id;
 
     @Column(name = "model")
     private String model;
@@ -20,6 +19,7 @@ public class Car {
     private int series;
 
     @OneToOne (mappedBy = "car")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private User user;
 
 
@@ -31,6 +31,19 @@ public class Car {
         this.series = series;
     }
 
+    public Car(String model, int series, User user) {
+        this.model = model;
+        this.series = series;
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getModel() {
         return model;
@@ -56,17 +69,18 @@ public class Car {
         this.user = user;
     }
 
-    @Override
+
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return series == car.series && Objects.equals(id, car.id) && Objects.equals(model, car.model) && Objects.equals(user, car.user);
+        return id == car.id && series == car.series && Objects.equals(model, car.model);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, model, series, user);
+        return Objects.hash(id, model, series);
     }
 
     @Override
@@ -75,9 +89,9 @@ public class Car {
                 "id=" + id +
                 ", model='" + model + '\'' +
                 ", series=" + series +
-                ", user=" + user +
                 '}';
     }
+
 }
 
 

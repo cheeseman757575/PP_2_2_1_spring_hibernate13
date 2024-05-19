@@ -3,23 +3,21 @@ package hiber.service;
 import hiber.model.Car;
 import hiber.model.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Component
 public interface UserService {
     void add(User user);
-
     void addCar(Car car);
-
     void delete (User user);
 
-
     void addUserCar(Car car);
+    List<User> listUsers();
 
-    default User getUserCar(Car car) {return null;}
-
-//    public List<User> getUserByCar(Collection<String> model, Collection<Integer> series);
-
+    @Transactional(readOnly = true)
     List<User> getUsersList();
+
+    User getUserCar(String model, int series);
+
 }
